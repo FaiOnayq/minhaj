@@ -1,3 +1,5 @@
+## منهاج - minhaj
+
 ┌────────────────────────────┐
 │        Teacher Input       │
 │  (raw instructional text)  │
