@@ -1,27 +1,16 @@
 ## منهاج - minhaj
 ```mermaid
 graph TD;
-    A[Teacher Input<br/>(Raw Instructional Text)]
-    B[Requirement Interpreter Agent<br/>- Extracts intent<br/>- Normalizes constraints<br/>- Outputs JSON spec]
-    C[Web Search & Resource Retrieval Agent<br/>- Generates queries<br/>- Searches Web / OER<br/>- Extracts objectives<br/>- Filters relevance]
-    D[Curriculum Planner Agent<br/>(Syllabus Builder)<br/>- Aligns objectives<br/>- Creates weekly plan<br/>- Maps outcomes to topics]
-
-    E[Slide Agent<br/>(QMD)<br/>- Slides]
-    F[Lab Agent<br/>(ipynb / py / java)<br/>- Labs]
-    G[Exercise Agent<br/>- Problems]
-
-    H[Exporter Agent<br/>- Organizes files<br/>- Generates README<br/>- Exports ZIP]
-
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    D --> F
-    D --> G
-    E --> H
-    F --> H
-    G --> H
-
+    TeacherInput["Teacher Input\n(raw instructional text)"] --> RequirementInterpreter;
+    RequirementInterpreter["Requirement Interpreter Agent\n- Extracts intent\n- Normalizes constraints\n- Outputs JSON spec"] --> WebSearchAgent;
+    WebSearchAgent["Web Search & Resource Retrieval Agent\n- Generates queries\n- Searches web/OER\n- Extracts objectives\n- Filters relevance"] --> CurriculumPlanner;
+    CurriculumPlanner["Curriculum Planner Agent\n(Syllabus Builder)\n- Aligns objectives\n- Creates weekly plan\n- Maps outcomes → topics"] --> SlideAgent;
+    CurriculumPlanner --> LabAgent;
+    CurriculumPlanner --> ExerciseAgent;
+    SlideAgent["Slide Agent (QMD)\n- Slides"] --> ExporterAgent;
+    LabAgent["Lab Agent (ipynb / py/java)\n- Labs"] --> ExporterAgent;
+    ExerciseAgent["Exercise Agent\n- Problems"] --> ExporterAgent;
+    ExporterAgent["Exporter Agent\n- Organizes files\n- Generates README\n- Exports ZIP"];
 ```
 ┌────────────────────────────┐
 
