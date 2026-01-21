@@ -1,13 +1,13 @@
 ## منهاج - minhaj
 ```mermaid
 graph TD;
-    A[Teacher Input] --> B[Requirement Interpreter];
-    B --> C[Web Search & Resource Retrieval];
-    C --> D[Curriculum Planner];
-    D --> E[Slide Agent];
-    D --> F[Lab Agent];
-    D --> G[Exercise Agent];
-    E --> H[Exporter Agent];
+    A[Teacher Input] --> B[Interpreter<br/>- Intent & constraints];
+    B --> C[Web Search<br/>- OER & objectives];
+    C --> D[Planner<br/>- Weekly syllabus];
+    D --> E[Slides];
+    D --> F[Labs];
+    D --> G[Exercises];
+    E --> H[Exporter<br/>- ZIP + README];
     F --> H;
     G --> H;
 ```
