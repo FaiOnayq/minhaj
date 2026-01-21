@@ -1,5 +1,11 @@
 ## منهاج - minhaj
-
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 ┌────────────────────────────┐
 
 │        Teacher Input       │
