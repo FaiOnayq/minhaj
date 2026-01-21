@@ -17,7 +17,7 @@
 │ Web Search & Resource      │
 │ Retrieval Agent            │
 │ - Generates queries        │
-│ - Searches web / OER       │
+│ - Searches web/OER         │
 │ - Extracts objectives      │
 │ - Filters relevance        │
 └─────────────┬──────────────┘
@@ -27,8 +27,8 @@
 │ Curriculum Planner Agent   │
 │ (Syllabus Builder)         │
 │ - Aligns objectives        │
-│ - Creates weekly plan     │
-│ - Maps outcomes → topics  │
+│ - Creates weekly plan      │
+│ - Maps outcomes → topics   │
 └─────────────┬──────────────┘
               │
       ┌───────┴────────┬─────────────┐
@@ -36,7 +36,7 @@
 ┌──────────────┐ ┌──────────────┐ ┌──────────────┐
 │ Slide Agent  │ │ Lab Agent    │ │ Exercise     │
 │ (QMD)        │ │ (ipynb /     │ │ Agent        │
-│              │ │  py / java) │ │              │
+│              │ │  py/java)    │ │              │
 │ - Slides     │ │ - Labs       │ │ - Problems   │
 └──────┬───────┘ └──────┬───────┘ └──────┬───────┘
        │                │                │
