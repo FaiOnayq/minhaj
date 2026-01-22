@@ -8,7 +8,7 @@ graph TD;
     E --> F[Labs];
     E --> G[Exams];
     F --> G
-    E --> H[Exporter<br/>- ZIP];
+    G --> H[Exporter<br/>- ZIP];
 
 ```
 
