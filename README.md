@@ -5,11 +5,11 @@ graph TD;
     B --> C[Web Search<br/>- OER & objectives];
     C --> D[Planner<br/>- Weekly syllabus];
     D --> E[Slides];
-    D --> F[Labs];
-    D --> G[Exercises];
-    E --> H[Exporter<br/>- ZIP + README];
-    F --> H;
-    G --> H;
+    E --> F[Labs];
+    D --> G[Exams];
+    E --> G
+    E --> H[Exporter<br/>- ZIP];
+
 ```
 
 
