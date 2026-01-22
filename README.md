@@ -1,16 +1,37 @@
 ## منهاج - minhaj
 ```mermaid
 graph TD;
-    A[Teacher Input] --> B[Interpreter<br/>- Intent & constraints];
-    B --> C[Web Search<br/>- OER & objectives];
-    C --> D[Planner<br/>- Weekly syllabus];
-    D --> E[Slides];
-    E --> F[Labs];
-    E --> G[Exams];
-    F --> G
-    E --> H[Exporter<br/>- ZIP];
+flowchart LR
+    A[Teacher Input]
+
+    subgraph Understanding
+        B[Interpreter<br/>Intent & Constraints]
+    end
+
+    subgraph Planning
+        C[Web Search<br/>OER & Objectives]
+        D[Planner<br/>Weekly Syllabus]
+    end
+
+    subgraph Content
+        E[Slides]
+        F[Labs]
+        G[Exams]
+    end
+
+    H[Exporter<br/>ZIP Package]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    E --> G
+
+    E --> H
     F --> H
     G --> H
+
 
 ```
 
