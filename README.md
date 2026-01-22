@@ -66,16 +66,15 @@ This agent grounds content generation in **real educational practice** by retrie
 
 ### What It Accesses
 
-* University course syllabi
-* Open Educational Resources (OER)
-* Public curricula and frameworks
-* MOOC platforms (Massive Open Online Courses) , Tech education websites, Online course marketplaces
+* University course syllabi (e.g. stanford, MIT, ...etc)
+* MOOC platforms (Massive Open Online Courses) (e.g. Coursera, EDX ...etc) , Tech education websites
 
 ### What It Extracts
 
 * Learning objectives
 * Topic sequences
 * Academic level indicators
+* 
   
 ### Output
 
@@ -84,6 +83,10 @@ A set of **normalized resource objects**, each containing:
 * Topics
 * Learning outcomes
 * Course structure patterns
+* Domain-specific technical coverage, such as:
+  ** Core concepts and techniques
+  ** Algorithms / models (e.g., for ML: regression, trees, neural networks)
+  ** Frameworks, libraries, or tools commonly used at that level
 * Source metadata
 
 ---
