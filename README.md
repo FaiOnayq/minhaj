@@ -6,8 +6,8 @@ graph TD;
     C --> D[Planner<br/>- Weekly syllabus];
     D --> E[Slides];
     E --> F[Labs];
-    D --> G[Exams];
-    E --> G
+    E --> G[Exams];
+    F --> G
     E --> H[Exporter<br/>- ZIP];
 
 ```
