@@ -17,16 +17,10 @@ graph TD;
 
 ### Purpose
 
-The Teacher Input is the **entry point of the system**. It captures the instructor’s instructional intent in natural language without forcing them to understand technical or pedagogical formalisms.
-
-### Input Characteristics
-
-* Free-text description (e.g., topic, level, duration)
-* Optional constraints (language, format, assessment type)
-* Pedagogical preferences (labs vs theory, difficulty)
+The Teacher Input is the **entry point of the system**. It captures the instructor’s instructional intent in natural language.
 
 ### Example
-
+* Free-text description (e.g., topic, level, duration, learning goals, constraints)
 > “Create a 6-week introductory Java programming course with slides and practical labs for first-year undergraduates.”
 
 ### Output
