@@ -10,7 +10,8 @@ def search_web(query):
         response = client.search(
             query=query,
             max_results=MAX_SEARCH_RESULTS,
-            search_depth=SEARCH_DEPTH
+            search_depth=SEARCH_DEPTH,
+            include_answer=True
         )
         return response.get('results', [])
     except Exception as e:
