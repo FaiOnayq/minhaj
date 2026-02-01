@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Minhaj – AI Curriculum Builder</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+
+<!-- Sidebar Toggle Button -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="logo">📘</span>
+    <span class="title">Minhaj</span>
+  </div>
+
+  <nav class="sidebar-menu">
+    <div class="sidebar-item active">Account</div>
+    <div class="sidebar-item">History</div>
+    <div class="sidebar-item">Settings</div>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<div class="min-h-screen flex items-center justify-center">
+
+  <div class="bg-card w-full max-w-2xl p-8 rounded shadow relative">
+
+    <!-- Theme Switch -->
+    <div class="theme-switch">
+      <label class="day-night-switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="toggle-track">
+          <span class="icon">☀</span>
+          <span class="icon">🌙</span>
+          <span class="toggle-thumb"></span>
+        </span>
+      </label>
+    </div>
+
+    <!-- Logo -->
+    <div class="flex flex-col items-center mb-6">
+      <img src="static/assets/minhaj-logo.png" class="w-28 mb-3" alt="Minhaj Logo">
+      <h1 class="text-2xl font-bold text-indigo-600">Minhaj</h1>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        AI Curriculum Builder
+      </p>
+    </div>
+
+    <p class="text-gray-600 dark:text-gray-400 mb-6">
+      Generate slides, labs, and exams in one click
+    </p>
+
+    <!-- Form -->
+    <form id="curriculumForm">
+    <div class="space-y-4">
+      <input class="input" id="title" name="title" placeholder="Course Title" required>
+      <input class="input" id="subject" name="subject" placeholder="Subject / Domain">
+
+      <div>
+    <input type="number" min="1" max="5" class="input" id="duration" name="duration" placeholder="Duration (weeks)">
+    <p class="hint">Max duration: 5 weeks</p>
+  </div>
+
+
+      <select class="input" id="education_level" name="education_level">
+        <option value="">Education Level</option>
+        <option>Middle School</option>
+        <option>high School</option>
+        <option>University junior</option>
+        <option>University sophomore</option>
+        <option>University senior</option>
+        <option>Bootcamp</option>
+      </select>
+
+      <textarea class="input" id="goals" name="goals" rows="4"
+    placeholder="Teaching goals, constraints, or preferences"></textarea>
+
+      <!-- Reference -->
+      <div>
+        <label class="label">Reference material (optional)</label>
+
+        <div class="reference-card">
+          <div class="flex items-center gap-3">
+            <span class="text-xl">📎</span>
+            <span class="text-sm">Attach a reference URL</span>
+          </div>
+          <button onclick="toggleLinkInput()" id="toggleLinkBtn">Add link</button>
+          <input id="reference_link" name="reference_link" type="url" class="input mt-3" placeholder="https://example.com">
+        </div>
+
+        <input id="reference_link" type="url"
+          class="input hidden mt-3"
+          placeholder="https://example.com">
+      </div>
+    </div>
+    <button type="button"
+  onclick="generateCurriculum()"
+  class="mt-6 w-full bg-indigo-600 text-white py-2 rounded font-semibold hover:bg-indigo-700">
+  Generate Curriculum ZIP </button>
+  <p id="status" style="margin-top:12px; color:#555;"></p>
+
+    <p class="status-text"></p>
+
+  </div>
+</div>
+</form>
+<script>
+async function generateCurriculum() {
+    const form = document.getElementById("curriculumForm");
+    
+    // Build JSON from form
+    const data = {
+        title: form.title.value,
+        subject: form.subject.value,
+        duration: form.duration.value,
+        education_level: form.education_level.value,
+        goals: form.goals.value,
+        reference_link: form.reference_link.value
+    };
+
+    document.getElementById("status").textContent = "Sending...";
+
+    try {
+        const response = await fetch("/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        document.getElementById("status").textContent = result.message;
+    } catch (error) {
+        document.getElementById("status").textContent = "Error sending data!";
+        console.error(error);
+    }
+}
+</script>
+
+
+</body>
+</html>
