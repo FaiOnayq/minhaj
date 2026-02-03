@@ -134,7 +134,7 @@
       <p id="status" class="mt-4 text-center text-sm text-gray-600 dark:text-gray-400 min-h-[24px]"></p>
 
       <pre id="output"
-        class="mt-6 p-4 bg-gray-100 dark:bg-gray-800 text-xs rounded overflow-auto max-h-96 hidden">
+        class="mt-6 p-4 bg-100 dark:bg-800 text-xs rounded overflow-auto max-h-96 hidden">
       </pre>
     </form>
 
@@ -186,7 +186,7 @@ async function generateCurriculum() {
         output.classList.remove("hidden");
         output.textContent = JSON.stringify(result.course, null, 2);
 
-        
+
     } catch (error) {
         document.getElementById("status").textContent = "❌ Generation failed. Please try again.";
         console.error("Generation error:", error);
