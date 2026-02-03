@@ -27,7 +27,6 @@ def create_workflow():
     # Add agents
     workflow.add_node("curriculum_researcher", curriculum_researcher)
     workflow.add_node("content_analyst", content_analyst)
-    workflow.add_node("writer", writer)
     
     # Connect them
     workflow.set_entry_point("curriculum_researcher")
