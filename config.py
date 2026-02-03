@@ -8,15 +8,12 @@ load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
-# Models
+# Model configurations
 RESEARCHER_MODEL = "llama-3.1-8b-instant"
-ANALYST_MODEL = "llama-3.1-8b-instant"
-CURR_MODEL = "llama-3.1-8b-instant"
-PEDAGOGY_MODEL = "llama-3.1-8b-instant"
-TECHNICAL_DEPTH_MODEL = "llama-3.1-8b-instant"
-CURR_VALID_MODEL = "llama-3.1-8b-instant"
-WRITER_MODEL = "llama-3.3-70b-versatile"
+SYNTHESIZER_MODEL = "llama-3.1-8b-instant"
+STRUCTURE_MODEL = "llama-3.3-70b-versatile"
+VALIDATOR_MODEL = "llama-3.1-8b-instant"
 
-# Search Settings
+# Search configuration
 MAX_SEARCH_RESULTS = 5
 SEARCH_DEPTH = "advanced"

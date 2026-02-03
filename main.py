@@ -2,8 +2,10 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from workflow import generate_course
+from workflow import Workflow
 import json
+
+workflow = Workflow()
 
 app = FastAPI(title="Minhaj – AI Curriculum Builder")
 
@@ -27,14 +29,16 @@ async def generate(data: dict):
         print(json.dumps(data, indent=2))
         
         # Call the course generation function
-        course = generate_course(data)
+        result = workflow.run(data)
+        print("Course generation completed.")
+        print(result)
         
         # Optionally, save the generated course to a JSON file
         with open("generated_course.json", "w") as f:
-            json.dump(course, f, indent=2)
+            json.dump(result, f, indent=2)
         
         # Return generated course as JSON
-        return JSONResponse({"message": "Course generated successfully!", "course": course})
+        return JSONResponse({"message": "Course generated successfully!", "course": result})
     
     except Exception as e:
         # Handle any errors

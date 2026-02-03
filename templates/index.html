@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minhaj – AI Curriculum Builder</title>
 
-  <!-- Tailwind -->
+  <!-- Tailwind (fixed URL spacing) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Custom CSS -->
@@ -59,79 +60,114 @@
       </p>
     </div>
 
-    <p class="text-gray-600 dark:text-gray-400 mb-6">
+    <p class="text-gray-600 dark:text-gray-400 mb-6 text-center">
       Generate slides, labs, and exams in one click
     </p>
 
     <!-- Form -->
     <form id="curriculumForm">
-    <div class="space-y-4">
-      <input class="input" id="title" name="title" placeholder="Course Title" required>
-      <input class="input" id="subject" name="subject" placeholder="Subject / Domain">
-
-      <div>
-    <input type="number" min="1" max="5" class="input" id="duration" name="duration" placeholder="Duration (weeks)">
-    <p class="hint">Max duration: 5 weeks</p>
-  </div>
-
-
-      <select class="input" id="education_level" name="education_level">
-        <option value="">Education Level</option>
-        <option>Middle School</option>
-        <option>high School</option>
-        <option>University junior</option>
-        <option>University sophomore</option>
-        <option>University senior</option>
-        <option>Bootcamp</option>
-      </select>
-
-      <textarea class="input" id="goals" name="goals" rows="4"
-    placeholder="Teaching goals, constraints, or preferences"></textarea>
-
-      <!-- Reference -->
-      <div>
-        <label class="label">Reference material (optional)</label>
-
-        <div class="reference-card">
-          <div class="flex items-center gap-3">
-            <span class="text-xl">📎</span>
-            <span class="text-sm">Attach a reference URL</span>
-          </div>
-          <button onclick="toggleLinkInput()" id="toggleLinkBtn">Add link</button>
-          <input id="reference_link" name="reference_link" type="url" class="input mt-3" placeholder="https://example.com">
+      <div class="space-y-5">
+        <!-- 1. Target Topic -->
+        <div>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">🎯 Target Topic</label>
+          <input class="input" id="topic" name="topic" placeholder="e.g., MLOps, React Development, Computer Vision" required>
         </div>
 
-        <input id="reference_link" type="url"
-          class="input hidden mt-3"
-          placeholder="https://example.com">
-      </div>
-    </div>
-    <button type="button"
-  onclick="generateCurriculum()"
-  class="mt-6 w-full bg-indigo-600 text-white py-2 rounded font-semibold hover:bg-indigo-700">
-  Generate Curriculum ZIP </button>
-  <p id="status" style="margin-top:12px; color:#555;"></p>
+        <!-- 2. Learner Level -->
+        <div>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">👥 Learner Level</label>
+          <select class="input" id="learner_level" name="learner_level" required>
+            <option value="">Select proficiency level</option>
+            <option value="beginner">Beginner (no prior experience)</option>
+            <option value="intermediate">Intermediate (some hands-on experience)</option>
+            <option value="advanced">Advanced (comfortable with core concepts)</option>
+          </select>
+        </div>
 
-    <p class="status-text"></p>
+        <!-- 3. Duration Constraints -->
+        <div>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">⏱️ Duration Constraints</label>
+          <input type="number" min="1" max="12" class="input" id="duration_weeks" name="duration_weeks" placeholder="Number of weeks (max 12)" required>
+          <p class="hint text-xs text-gray-500 mt-1">Recommended: 4-8 weeks for comprehensive coverage</p>
+        </div>
+
+        <!-- 4. Preferred Tools/Technologies -->
+        <div>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">🛠️ Preferred Tools & Technologies</label>
+          <input class="input" id="tools" name="tools" placeholder="e.g., Python, Docker, GCP, PyTorch, React">
+          <p class="hint text-xs text-gray-500 mt-1">Leave blank for AI-recommended stack</p>
+        </div>
+
+        <!-- 5. Learning Goals -->
+        <div>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">🎯 Learning Goals</label>
+          <textarea class="input" id="learning_goals" name="learning_goals" rows="3" 
+            placeholder="What should learners be able to DO by the end?&#10;e.g., Build production ML pipelines, deploy models to cloud, write maintainable MLOps code"></textarea>
+        </div>
+
+        <!-- 6. Constraints & Requests -->
+        <div>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">⚠️ Constraints & Special Requests</label>
+          <textarea class="input" id="constraints" name="constraints" rows="3"
+            placeholder="Time limitations, prerequisites, accessibility needs, assessment preferences, or other requirements"></textarea>
+        </div>
+
+        <!-- Reference Material -->
+        <div>
+          <label class="label block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">📎 Reference Material (Optional)</label>
+          <div class="reference-card">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">🔗</span>
+              <span class="text-sm">Attach syllabus, book, or resource URL</span>
+            </div>
+            <input id="reference_link" name="reference_link" type="url" class="input mt-3" placeholder="https://example.com">
+          </div>
+        </div>
+      </div>
+
+      <button type="button"
+        onclick="generateCurriculum()"
+        class="mt-8 w-full bg-indigo-600 text-white py-3 rounded font-semibold hover:bg-indigo-700 transition-colors">
+        Generate Curriculum ZIP
+      </button>
+      
+      <p id="status" class="mt-4 text-center text-sm text-gray-600 dark:text-gray-400 min-h-[24px]"></p>
+
+      <pre id="output"
+        class="mt-6 p-4 bg-gray-100 dark:bg-gray-800 text-xs rounded overflow-auto max-h-96 hidden">
+      </pre>
+    </form>
 
   </div>
 </div>
-</form>
+
 <script>
 async function generateCurriculum() {
     const form = document.getElementById("curriculumForm");
     
-    // Build JSON from form
+    // Build JSON from form matching your 6 categories
     const data = {
-        course_title: form.title.value,
-        subject_domain: form.subject.value,
-        duration_weeks: form.duration.value,
-        education_level: form.education_level.value,
-        teaching_goals: form.goals.value,
-        reference_link: form.reference_link.value
+        target_topic: form.topic.value.trim(),
+        learner_level: form.learner_level.value,
+        duration_weeks: parseInt(form.duration_weeks.value) || 0,
+        preferred_tools: form.tools.value.trim(),
+        learning_goals: form.learning_goals.value.trim(),
+        constraints_requests: form.constraints.value.trim(),
+        reference_link: form.reference_link.value.trim()
     };
 
-    document.getElementById("status").textContent = "Sending...";
+    // Validation
+    if (!data.target_topic || !data.learner_level || !data.duration_weeks) {
+        document.getElementById("status").textContent = "❗ Please fill required fields (Topic, Level, Duration)";
+        return;
+    }
+    
+    if (data.duration_weeks < 1 || data.duration_weeks > 12) {
+        document.getElementById("status").textContent = "❗ Duration must be between 1-12 weeks";
+        return;
+    }
+
+    document.getElementById("status").textContent = "✨ Generating curriculum...";
 
     try {
         const response = await fetch("/generate", {
@@ -140,15 +176,37 @@ async function generateCurriculum() {
             body: JSON.stringify(data)
         });
 
+        if (!response.ok) throw new Error('Network response was not ok');
+        
         const result = await response.json();
-        document.getElementById("status").textContent = result.message;
+
+        document.getElementById("status").textContent =`✅ ${result.message || "Curriculum generated successfully!"}`;
+
+        const output = document.getElementById("output");
+        output.classList.remove("hidden");
+        output.textContent = JSON.stringify(result.course, null, 2);
+
+        
     } catch (error) {
-        document.getElementById("status").textContent = "Error sending data!";
-        console.error(error);
+        document.getElementById("status").textContent = "❌ Generation failed. Please try again.";
+        console.error("Generation error:", error);
     }
 }
-</script>
 
+// Theme toggle persistence
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggle = document.getElementById('themeToggle');
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.documentElement.classList.add('dark');
+    themeToggle.checked = true;
+  }
+  
+  themeToggle.addEventListener('change', () => {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+  });
+});
+</script>
 
 </body>
 </html>
