@@ -3,7 +3,6 @@ from langgraph.graph import StateGraph, END
 from typing import TypedDict
 from agents.researcher import curriculum_researcher
 from agents.analyst import content_analyst 
-from agents.writer import writer  
 
 
 class State(TypedDict):
