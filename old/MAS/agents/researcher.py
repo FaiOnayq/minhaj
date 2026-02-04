@@ -71,7 +71,7 @@ Generate ONLY the search queries, one per line. Be specific and academic."""
     #     print("\n")
     # sys.exit(0)
     
-    return state
+    return {**state, "raw_search_results": normalized_resources}
 
 
 def _detect_source_type(url):

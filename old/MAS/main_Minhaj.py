@@ -1,7 +1,7 @@
 """
 Course Generation System
 """
-from workflow import generate_course
+from workflowv2 import generate_course
 import json
 
 

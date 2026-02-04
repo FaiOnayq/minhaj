@@ -1,4 +1,4 @@
-"""analyst Agent"""
+"""analyst Agent     --old--"""
 from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage
 from config import GROQ_API_KEY,  ANALYST_MODEL

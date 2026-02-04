@@ -11,6 +11,10 @@ TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 # Models
 RESEARCHER_MODEL = "llama-3.1-8b-instant"
 ANALYST_MODEL = "llama-3.1-8b-instant"
+CURR_MODEL = "llama-3.1-8b-instant"
+PEDAGOGY_MODEL = "llama-3.1-8b-instant"
+TECHNICAL_DEPTH_MODEL = "llama-3.1-8b-instant"
+CURR_VALID_MODEL = "llama-3.1-8b-instant"
 WRITER_MODEL = "llama-3.3-70b-versatile"
 
 # Search Settings

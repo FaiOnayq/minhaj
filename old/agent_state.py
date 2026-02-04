@@ -1,4 +1,4 @@
-from typing import TypedDict, Annotated, Sequence, Dict
+from typing import TypedDict, Annotated, Sequence
 import operator
 from langchain_core.messages import BaseMessage
 
@@ -13,8 +13,3 @@ class AgentState(TypedDict):
     course_structure: dict
     validated_course: dict
     next_agent: str
-    
-    # Content generation state
-    slides_content: Dict[int, str]
-    labs_content: Dict[int, str]
-    quiz_content: Dict[int, str]

@@ -4,35 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minhaj – AI Curriculum Builder</title>
-  <script> tailwind.config = { darkMode: 'class'} </script>
 
   <!-- Tailwind (fixed URL spacing) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/static/css/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+<body>
 
+<!-- Sidebar Toggle Button -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="logo">📘</span>
+    <span class="title">Minhaj</span>
+  </div>
+
+  <nav class="sidebar-menu">
+    <div class="sidebar-item active">Account</div>
+    <div class="sidebar-item">History</div>
+    <div class="sidebar-item">Settings</div>
+  </nav>
+</aside>
 
 <!-- Main Content -->
 <div class="min-h-screen flex items-center justify-center">
 
-<div class="bg-white dark:bg-gray-800 w-full max-w-2xl p-8 rounded shadow relative transition-colors">
+  <div class="bg-card w-full max-w-2xl p-8 rounded shadow relative">
 
-
+    <!-- Theme Switch -->
+    <div class="theme-switch">
+      <label class="day-night-switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="toggle-track">
+          <span class="icon">☀</span>
+          <span class="icon">🌙</span>
+          <span class="toggle-thumb"></span>
+        </span>
+      </label>
+    </div>
 
     <!-- Logo -->
-    <div class="flex flex-col items-center mb-6 transition-colors duration-300 font-[Poppins]">
-      
-      <img src="static/assets/minhaj-logo.png" class="w-28 mb-4" alt="Minhaj Logo">
-      <h1 class="text-2xl font-bold text-[#9155ba]">Minhaj</h1>
+    <div class="flex flex-col items-center mb-6">
+      <img src="static/assets/minhaj-logo.png" class="w-28 mb-3" alt="Minhaj Logo">
+      <h1 class="text-2xl font-bold text-indigo-600">Minhaj</h1>
       <p class="text-sm text-gray-600 dark:text-gray-400">
         AI Curriculum Builder
       </p>
@@ -47,15 +69,13 @@
       <div class="space-y-5">
         <!-- 1. Target Topic -->
         <div>
-          <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Target Topic
-            <span class="text-red-500 ml-0.5">*</span></label>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">🎯 Target Topic</label>
           <input class="input" id="topic" name="topic" placeholder="e.g., MLOps, React Development, Computer Vision" required>
         </div>
 
         <!-- 2. Learner Level -->
         <div>
-          <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Learner Level
-            <span class="text-red-500 ml-0.5">*</span></label>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">👥 Learner Level</label>
           <select class="input" id="learner_level" name="learner_level" required>
             <option value="">Select proficiency level</option>
             <option value="beginner">Beginner (no prior experience)</option>
@@ -66,36 +86,35 @@
 
         <!-- 3. Duration Constraints -->
         <div>
-           <label class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Duration Constraints
-            <span class="text-red-500 ml-0.5">*</span></label>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">⏱️ Duration Constraints</label>
           <input type="number" min="1" max="12" class="input" id="duration_weeks" name="duration_weeks" placeholder="Number of weeks (max 12)" required>
           <p class="hint text-xs text-gray-500 mt-1">Recommended: 4-8 weeks for comprehensive coverage</p>
         </div>
 
         <!-- 4. Preferred Tools/Technologies -->
         <div>
-          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300"> Preferred Tools & Technologies</label>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">🛠️ Preferred Tools & Technologies</label>
           <input class="input" id="tools" name="tools" placeholder="e.g., Python, Docker, GCP, PyTorch, React">
           <p class="hint text-xs text-gray-500 mt-1">Leave blank for AI-recommended stack</p>
         </div>
 
         <!-- 5. Learning Goals -->
         <div>
-          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Learning Goals</label>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">🎯 Learning Goals</label>
           <textarea class="input" id="learning_goals" name="learning_goals" rows="3" 
             placeholder="What should learners be able to DO by the end?&#10;e.g., Build production ML pipelines, deploy models to cloud, write maintainable MLOps code"></textarea>
         </div>
 
         <!-- 6. Constraints & Requests -->
         <div>
-          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300"> Constraints & Special Requests</label>
+          <label class="label block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">⚠️ Constraints & Special Requests</label>
           <textarea class="input" id="constraints" name="constraints" rows="3"
             placeholder="Time limitations, prerequisites, accessibility needs, assessment preferences, or other requirements"></textarea>
         </div>
 
         <!-- Reference Material -->
         <div>
-          <label class="label block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Reference Material</label>
+          <label class="label block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">📎 Reference Material (Optional)</label>
           <div class="reference-card">
             <div class="flex items-center gap-3">
               <span class="text-xl">🔗</span>
@@ -107,8 +126,8 @@
       </div>
 
       <button type="button"
-        onclick="generateCurriculum(event)"
-        class="mt-8 w-full bg-[#9155ba] text-white py-3 rounded font-semibold hover:bg-[#7e46a3] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+        onclick="generateCurriculum()"
+        class="mt-8 w-full bg-indigo-600 text-white py-3 rounded font-semibold hover:bg-indigo-700 transition-colors">
         Generate Curriculum ZIP
       </button>
       
@@ -125,7 +144,6 @@
 <script>
 async function generateCurriculum() {
     const form = document.getElementById("curriculumForm");
-    const button = event.target;
     
     // Build JSON from form matching your 6 categories
     const data = {
@@ -140,28 +158,16 @@ async function generateCurriculum() {
 
     // Validation
     if (!data.target_topic || !data.learner_level || !data.duration_weeks) {
-        document.getElementById("status").textContent = " ! Please fill required fields (Topic, Level, Duration)";
+        document.getElementById("status").textContent = "❗ Please fill required fields (Topic, Level, Duration)";
         return;
     }
     
-    if (data.duration_weeks < 1 || data.duration_weeks > 8) {
-        document.getElementById("status").textContent = "! Duration must be between 1-8 weeks";
+    if (data.duration_weeks < 1 || data.duration_weeks > 12) {
+        document.getElementById("status").textContent = "❗ Duration must be between 1-12 weeks";
         return;
     }
 
-    button.disabled = true;
-    button.classList.add('opacity-50', 'cursor-not-allowed');
-    button.textContent = 'Generating...';
-
-    document.getElementById("status").innerHTML = `
-  <div style="display:flex; justify-content:center; align-items:center; height:100%;">
-    <img src="/static/assets/loading.gif" alt="Loading..." style="width:50px; height:50px;">
-    <span class="ml-3">Generating content, this may take a moment...</span>
-  </div>
-`;
-    await new Promise(resolve => setTimeout(resolve, 100));
-
-
+    document.getElementById("status").textContent = "✨ Generating curriculum...";
 
     try {
         const response = await fetch("/generate", {
@@ -172,32 +178,18 @@ async function generateCurriculum() {
 
         if (!response.ok) throw new Error('Network response was not ok');
         
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
+        const result = await response.json();
 
-        // Create a temporary link and click it to trigger download
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "course.zip"; // suggested filename
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        document.getElementById("status").textContent =`✅ ${result.message || "Curriculum generated successfully!"}`;
 
-        // Clean up object URL
-        window.URL.revokeObjectURL(url);
-
-        document.getElementById("status").textContent = " ✔ Curriculum ZIP is downloading!";
+        const output = document.getElementById("output");
+        output.classList.remove("hidden");
+        output.textContent = JSON.stringify(result.course, null, 2);
 
 
     } catch (error) {
-        document.getElementById("status").textContent = " x Generation failed. Please try again.";
+        document.getElementById("status").textContent = "❌ Generation failed. Please try again.";
         console.error("Generation error:", error);
-    }
-    finally {
-        // RE-ENABLE BUTTON after completion
-        button.disabled = false;
-        button.classList.remove('opacity-50', 'cursor-not-allowed');
-        button.textContent = 'Generate Curriculum ZIP';
     }
 }
 
@@ -215,8 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-<footer class="mt-12 mb-4 text-center text-xs text-gray-500 dark:text-gray-400">
-  © 2026 - Built with ❤︎⁠ by <span class="mt-12 mb-4 text-center text-xs text-gray-500 dark:text-gray-400">Noura Aljandol - Fai Bin Onayq - Wajan Alqahtani</span>
-</footer>
+
 </body>
 </html>
