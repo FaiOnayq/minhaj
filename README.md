@@ -1,208 +1,161 @@
-## منهاج - minhaj
-```mermaid
-graph TD;
-    A[Teacher Input] --> B[Interpreter Agent<br/>- Intent & constraints];
-    B --> C[Web Search Agent<br/>- OER & objectives];
-    C --> D[Planner Agent<br/>- Weekly syllabus];
-    D --> E[Slides Agent];
-    E --> F[Labs Agent];
-    F --> G[Exams Agent];
-    E --> G
-    E --> H[Exporter Agent<br/>- ZIP];
-    F --> H
-    G --> H
+
+
+## Minhaj – AI Curriculum Builder 🎓
+
+Minhaj is an agent-based AI system that transforms instructor inputs into a complete, structured, and exportable curriculum  including syllabus, slides, labs, and exams. in just one click.
+
+---
+## Features
+
+- Generate a full curriculum based on:
+  - Target topic
+  - Learner level
+  - Course duration
+  - Preferred tools & technologies
+  - Learning goals and constraints
+  - Optional reference material support
+- ⚡ Fast, clean, and user-friendly UI
+- AI-assisted curriculum generation
+
+---
+## Agents Architecture
+
+Minhaj is designed using an **agent-based AI architecture**, where each agent has a well-defined responsibility in the curriculum generation pipeline. to produce high-quality, structured educational content.
+
+---
+
+## Core Agents
+
+### 1️- Interpreter Agent
+
+**Purpose:**  
+Transforms user inputs into a structured (JASON) curriculum plan.
+
+**Inputs:**
+- Target topic
+- Learner level
+- Course duration
+- Constraints & preferences
+
+
+These inputs are validated on the frontend and converted into a **JSON payload**.
+
+
+---
+### 2- Web Research Agent (Tavily)
+
+**Purpose:** Ground the curriculum in real-world, up-to-date knowledge.
+
+**Responsibilities:**
+- Convert the user topic into a structured search query
+- Use Tavily to search the web
+- Extract:
+  - Relevant subtopics
+  - Industry tools and frameworks
+  - Best practices and trends
+
+**Output:**
+- Clean, summarized research context passed to downstream agents
+---
+
+### 3- Curriculum Planner Agent
+
+**Purpose:** Design the overall course structure.
+
+**Responsibilities:**
+- Analyze learner level and duration
+- Split content into weekly modules
+- Define learning objectives per week
+- Decide progression logic (from fundamentals → advanced)
+
+**Output:**
+Structured weekly curriculum plan
+
+---
+
+### 4- Content Generation Agents
+
+These agents operate **in parallel** using the curriculum plan and research context.
+
+#### - Slides Agent
+- Generates lecture slide outlines and content
+- Ensures alignment with weekly objectives
+
+#### - Labs Agent
+- Creates hands-on exercises and practical tasks
+- Matches tools and difficulty level
+
+#### Exams Agent
+- Generates quizzes and exams
+- Includes different question types
+- Aligns assessments with learning outcomes
+---
+
+### 5- Validation & Alignment Agent
+
+**Purpose:** Ensure consistency and quality.
+
+**Responsibilities:**
+- Check alignment between:
+  - Objectives
+  - Slides
+  - Labs
+  - Examsfix 
+- Enforce constraints (duration, level, goals)
+- Detect missing or inconsistent content
+
+---
+
+##  System Data Flow
+
+```text
+User
+ │
+ ▼
+Frontend Form
+ │  (Topic, Level, Duration, Goals, Constraints)
+ ▼
+JSON Payload
+ │
+ ▼
+Web Research Agent (Tavily)
+ │  └─ Live web context & best practices
+ ▼
+Curriculum Planner Agent
+ │  └─ Weekly structure & learning objectives
+ ▼
+Content Generation Agents (Parallel)
+ │  ├─ Slides Agent
+ │  ├─ Labs Agent
+ │  └─ Assessment Agent
+ ▼
+Validation & Alignment Agent
+ │  └─ Consistency + constraints enforcement
+ ▼
+ZIP Export
 
 ```
+## Tech Stack
 
+### Frontend
+- HTML5
+- Tailwind CSS
+- Vanilla JavaScript
 
-## 1. Teacher Input
+### Backend
+- Python
+- FastAPI
+- REST API (JSON-based)
 
-### Purpose
-
-The Teacher Input is the **entry point of the system**. It captures the instructor’s instructional intent in natural language.
-
-### Example
-* Free-text description (e.g., topic, level, duration, learning goals, constraints)
-> “Create a 6-week introductory Java programming course with slides and practical labs for first-year undergraduates.”
-
-### Output
 
 Raw, unstructured text passed to the **Interpreter Agent**.
 
----
-
-## 2. Interpreter Agent
-
-**(Intent & Constraints Extraction)**
-
-### Purpose
-
-The Interpreter Agent transforms ambiguous human input into a **formal internal requirement representation** that the rest of the system can reliably operate on.
-
-### Core Responsibilities
-
-* Identify instructional intent (subject, scope)
-* Extract constraints (duration, level, formats)
-* Normalize terminology (e.g., “intro” → beginner)
-* Resolve implicit assumptions
-
-### Output (JSON)
-
-* Subject domain
-* Educational level
-* Duration (weeks/modules)
-* Learning goals
-* Required outputs (slides, labs, exams)
-
-This JSON format is stored and passed forward.
 
 ---
+### Team
 
-## 3. Web Search & Resource Retrieval Agent
-
-**(OER & Learning Objectives)**
-
-### Purpose
-
-This agent grounds content generation in **real educational practice** by retrieving curriculum-level signals from web sources.
-
-### What It Accesses
-
-* University course syllabi (e.g. stanford, MIT, ...etc)
-* MOOC platforms (Massive Open Online Courses) (e.g. Coursera, EDX ...etc) , Tech education websites
-
-
-### Output
-
-A set of **normalized resource objects, Topic sequences based on Academic level indicators with search limit (3 sources)**, each containing:
-
-* Topics
-* Learning outcomes
-* Course structure patterns
-* Domain-specific technical coverage, such as:
-* * Core concepts and techniques
-* * Algorithms / models (e.g., for ML: regression, trees, neural networks)
-* * Frameworks, libraries, or tools commonly used at that level
-* Source metadata
-
----
-
-## 4. Planner Agent
-
-**(Weekly Syllabus Generation)**
-
-### Purpose
-
-The Planner Agent combines teacher requirements and search data to create a clear, time-based syllabus.
-
-
-### Output
-
-A **weekly syllabus**, including:
-
-* Topics details per week
-* Learning outcomes
-* content type indicators (slides, labs, exams)
-
-This syllabus becomes the blueprint for all content generation agents.
-
----
-
-## 5. Slides Generation Agent
-
-### Purpose
-
-The Slides Agent generate the syllabus into into **ready-to-teach instructional presentations**.
-
-### Input
-
-* Weekly syllabus 
-
-### Responsibilities
-
-* Generate structured slide content
-* Align explanations with outcomes
-* Output in teacher-editable formats (e.g., QMD)
-
-### Output
-
-* One presentation per week/module
-* Clear learning objectives
-* Concept explanations
-* Examples
-
----
-
-## 6. Labs Generation Agent
-
-### Purpose
-
-The Labs Agent produces **hands-on practical activities** aligned with syllabus outcomes.
-
-### Input
-
-* slides content
-* Required programming languages if available 
-
-### Responsibilities
-
-* Design lab tasks
-* Provide code and instructions
-* Encourage active learning
-* Support multiple languages/formats (Python, Java, notebooks)
-
-
-### Output
-
-* Executable lab files (e.g., `.ipynb`, `.py`, `.java`)
-* Clear objectives and steps
-* Exercises tied directly to outcomes
-
-
----
-
-## 7. Exam Generation Agent
-
-### Purpose
-
-The Exams Agent creates **assessment materials**.
-
-### Input
-
-* Learning outcomes
-* slides, labs
-
-
-### Responsibilities
-
-* Generate conceptual questions
-* Create applied problem-solving tasks
-* Balance difficulty and coverage
-* Avoid solution leakage
-
-### Output
-
-* word processors files
-
----
-
-## 8. Exporter Agent
-
-**(ZIP)**
-
-### Purpose
-
-The Exporter Agent packages all generated artifacts into a **.zip format**.
-
-### Responsibilities
-
-* Organize files into a clear directory structure
-* Export all content as a single ZIP archive
-
-### Output Structure
-
-* Syllabus
-* Slides
-* Labs
-* Exams
+Built with ♡ by:
+	•	Noura Aljandol
+	•	Fai AlOnayq
+	•	Wajan Alqahtani
 
