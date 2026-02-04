@@ -2,7 +2,7 @@
 import os
 import zipfile
 from pathlib import Path
-
+import shutil
 
 def create_course_zip(base_dir="course", output_name="course.zip"):
     """
