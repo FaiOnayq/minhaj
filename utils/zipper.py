@@ -2,7 +2,7 @@
 import os
 import zipfile
 from pathlib import Path
-import shutil
+
 
 def create_course_zip(base_dir="course", output_name="course.zip"):
     """
@@ -16,18 +16,9 @@ def create_course_zip(base_dir="course", output_name="course.zip"):
         bool: True if successful, False otherwise
     """
     
-    if os.path.exists(base_dir):
-        # Remove all contents
-        for filename in os.listdir(base_dir):
-            file_path = os.path.join(base_dir, filename)
-            if os.path.isfile(file_path) or os.path.islink(file_path):
-                os.unlink(file_path)  # remove file or symlink
-            elif os.path.isdir(file_path):
-                shutil.rmtree(file_path)  # remove directory recursively
-        print(f"⚠ Directory {base_dir} exists - emptied its contents.")
-    else:
+    if not os.path.exists(base_dir):
         os.makedirs(base_dir)
-        print(f"⚠ Directory {base_dir} did not exist - created empty folder.")
+        print(f"⚠ Directory {base_dir} not found - creating empty folder.")
     
     zip_path = os.path.join(base_dir, output_name)
     
