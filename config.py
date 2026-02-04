@@ -11,9 +11,9 @@ TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 # Model configurations
 RESEARCHER_MODEL = "llama-3.1-8b-instant"
 SYNTHESIZER_MODEL = "llama-3.1-8b-instant"
-STRUCTURE_MODEL = "llama-3.3-70b-versatile"
+STRUCTURE_MODEL = "qwen/qwen3-32b"
 VALIDATOR_MODEL = "llama-3.1-8b-instant"
-CONTENT_MODEL = "llama-3.3-70b-versatile"
+CONTENT_MODEL = "qwen/qwen3-32b"
 
 
 
