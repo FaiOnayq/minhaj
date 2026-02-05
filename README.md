@@ -30,8 +30,11 @@ graph TD;
     D --> E[Structure Validation Agent];
     E --> F[Slides Generation Agent];
     F --> G[Labs Generation Agent];
-    F --> H[Quizzes Generation Agent]
-    E --> H[Exporter Agent<br/>- ZIP];
+    F --> H[Quizzes Generation Agent];
+	F --> I[Generate .zip file];
+	G --> I;
+	H --> I;
+	
 
 ```
 
