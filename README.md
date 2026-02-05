@@ -26,7 +26,7 @@ Minhaj is designed using an **agent-based AI architecture**, where each agent ha
 graph TD;
     A[Teacher Input] --> B[Reasercher Agent];
     B --> C[Knowledge & Resource Synthesizer Agent];
-    C --> D[Course Structure Builder Agent (Planner)];
+    C --> D[Course Structure Builder Agent 'Planner'];
     D --> E[Structure Validation Agent];
     E --> F[Slides Generation Agent];
     F --> G[Labs Generation Agent];
