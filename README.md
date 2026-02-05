@@ -179,7 +179,7 @@ ZIP Export
 ### Hosting
 - Railway
 
----
+
 ## Setup Instructions
 1. Clone the repository:
 ```bash
@@ -209,7 +209,7 @@ TAVILY_API_KEY=your_tavily_api_key_here
 ```bash
 uvicorn main:app --reload
 ```
-
+---
 
 ### Team
 
