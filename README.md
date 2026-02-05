@@ -40,20 +40,22 @@ graph TD;
 
 ---
 
+
 ## Core Agents
 
-### 1️- Interpreter Agent
+### 1️- Interpreter
 
 **Purpose:**  
-Transforms user inputs into a structured (JASON) curriculum plan.
+Transforms user inputs into a structured (JSON) curriculum plan.
 
 **Inputs:**
 - Target topic
 - Learner level
 - Course duration
+- learning goals
 - Constraints & preferences
-
-
+- link
+- 
 These inputs are validated on the frontend and converted into a **JSON payload**.
 
 
@@ -74,6 +76,16 @@ These inputs are validated on the frontend and converted into a **JSON payload**
 - Clean, summarized research context passed to downstream agents
 ---
 
+### 4- Knowledge & Resource Synthesizer Agent
+
+**Purpose:** Clean and organize the research findings.
+
+**Responsibilities:**
+- Reads the web results and any reference material provided by the user.
+- Picks out the most important subtopics.
+- Removes duplicates or irrelevant info.
+- Creates a clear, focused knowledge summary for course planning.
+
 ### 3- Curriculum Planner Agent
 
 **Purpose:** Design the overall course structure.
@@ -87,11 +99,19 @@ These inputs are validated on the frontend and converted into a **JSON payload**
 **Output:**
 Structured weekly curriculum plan
 
+### 5- Validation & Alignment Agent
+
+**Purpose:** Review and improve the course plan.
+
+**Responsibilities:**
+- Reviews the course structure for gaps or overloaded weeks.
+- Ensures learning objectives match the planned content.
+
 ---
 
 ### 4- Content Generation Agents
 
-These agents operate **in parallel** using the curriculum plan and research context.
+These agents operate using the curriculum plan and research context.
 
 #### - Slides Agent
 - Generates lecture slide outlines and content
@@ -107,18 +127,6 @@ These agents operate **in parallel** using the curriculum plan and research cont
 - Aligns assessments with learning outcomes
 ---
 
-### 5- Validation & Alignment Agent
-
-**Purpose:** Ensure consistency and quality.
-
-**Responsibilities:**
-- Check alignment between:
-  - Objectives
-  - Slides
-  - Labs
-  - Examsfix 
-- Enforce constraints (duration, level, goals)
-- Detect missing or inconsistent content
 
 ---
 
@@ -140,7 +148,7 @@ Web Research Agent (Tavily)
 Curriculum Planner Agent
  │  └─ Weekly structure & learning objectives
  ▼
-Content Generation Agents (Parallel)
+Content Generation Agents 
  │  ├─ Slides Agent
  │  ├─ Labs Agent
  │  └─ Assessment Agent
@@ -153,6 +161,11 @@ ZIP Export
 ```
 ## Tech Stack
 
+### AI & Orchestration
+- LangGraph
+- Groq API
+- Tavily Search API
+
 ### Frontend
 - HTML5
 - Tailwind CSS
@@ -163,11 +176,41 @@ ZIP Export
 - FastAPI
 - REST API (JSON-based)
 
-
-Raw, unstructured text passed to the **Interpreter Agent**.
-
+### Hosting
+- Railway
 
 ---
+## Setup Instructions
+1. Clone the repository:
+```bash
+git clone https://github.com/FaiOnayq/minhaj.git
+cd minhaj
+```
+
+2. Create a virtual environment with uv then Activate
+```bash
+uv venv --python 3.11
+.venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+uv pip install -r requirements.txt
+```
+
+4. Set up your .env file
+Create a .env file in the root directory with the following keys:
+```bash
+GROQ_API_KEY=your_groq_api_key_here
+TAVILY_API_KEY=your_tavily_api_key_here
+```
+
+5. Run the FastAPI app:
+```bash
+uvicorn main:app --reload
+```
+
+
 ### Team
 
 Built with ♡ by:
