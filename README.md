@@ -22,6 +22,19 @@ Minhaj is an agent-based AI system that transforms instructor inputs into a comp
 
 Minhaj is designed using an **agent-based AI architecture**, where each agent has a well-defined responsibility in the curriculum generation pipeline. to produce high-quality, structured educational content.
 
+```mermaid
+graph TD;
+    A[Teacher Input] --> B[Reasercher Agent];
+    B --> C[Knowledge & Resource Synthesizer Agent];
+    C --> D[Course Structure Builder Agent (Planner)];
+    D --> E[Structure Validation Agent];
+    E --> F[Slides Generation Agent];
+    F --> G[Labs Generation Agent];
+    F --> H[Quizzes Generation Agent]
+    E --> H[Exporter Agent<br/>- ZIP];
+
+```
+
 ---
 
 ## Core Agents
