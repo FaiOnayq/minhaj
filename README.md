@@ -14,8 +14,7 @@ Minhaj is an agent-based AI system that transforms instructor inputs into a comp
   - Preferred tools & technologies
   - Learning goals and constraints
   - Optional reference material support
-- ⚡ Fast, clean, and user-friendly UI
-- AI-assisted curriculum generation
+
 
 ---
 ## Agents Architecture
@@ -38,6 +37,57 @@ graph TD;
 
 ```
 
+
+## Tech Stack
+
+### AI & Orchestration
+- LangGraph
+- Groq API
+- Tavily Search API
+
+### Frontend
+- HTML5
+- Tailwind CSS
+- Vanilla JavaScript
+
+### Backend
+- Python
+- FastAPI
+- REST API (JSON-based)
+
+### Hosting
+- Render/Railway
+
+
+## Setup Instructions
+1. Clone the repository:
+```bash
+git clone https://github.com/FaiOnayq/minhaj.git
+cd minhaj
+```
+
+2. Create a virtual environment with uv then Activate
+```bash
+uv venv --python 3.11
+.venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+uv pip install -r requirements.txt
+```
+
+4. Set up your .env file
+Create a .env file in the root directory with the following keys:
+```bash
+GROQ_API_KEY=your_groq_api_key_here
+TAVILY_API_KEY=your_tavily_api_key_here
+```
+
+5. Run the FastAPI app:
+```bash
+uvicorn main:app --reload
+```
 ---
 
 
@@ -127,89 +177,6 @@ These agents operate using the curriculum plan and research context.
 - Aligns assessments with learning outcomes
 ---
 
-
----
-
-##  System Data Flow
-
-```text
-User
- │
- ▼
-Frontend Form
- │  (Topic, Level, Duration, Goals, Constraints)
- ▼
-JSON Payload
- │
- ▼
-Web Research Agent (Tavily)
- │  └─ Live web context & best practices
- ▼
-Curriculum Planner Agent
- │  └─ Weekly structure & learning objectives
- ▼
-Content Generation Agents 
- │  ├─ Slides Agent
- │  ├─ Labs Agent
- │  └─ Assessment Agent
- ▼
-Validation & Alignment Agent
- │  └─ Consistency + constraints enforcement
- ▼
-ZIP Export
-
-```
-## Tech Stack
-
-### AI & Orchestration
-- LangGraph
-- Groq API
-- Tavily Search API
-
-### Frontend
-- HTML5
-- Tailwind CSS
-- Vanilla JavaScript
-
-### Backend
-- Python
-- FastAPI
-- REST API (JSON-based)
-
-### Hosting
-- Railway
-
-
-## Setup Instructions
-1. Clone the repository:
-```bash
-git clone https://github.com/FaiOnayq/minhaj.git
-cd minhaj
-```
-
-2. Create a virtual environment with uv then Activate
-```bash
-uv venv --python 3.11
-.venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-uv pip install -r requirements.txt
-```
-
-4. Set up your .env file
-Create a .env file in the root directory with the following keys:
-```bash
-GROQ_API_KEY=your_groq_api_key_here
-TAVILY_API_KEY=your_tavily_api_key_here
-```
-
-5. Run the FastAPI app:
-```bash
-uvicorn main:app --reload
-```
----
 
 ### Team
 
